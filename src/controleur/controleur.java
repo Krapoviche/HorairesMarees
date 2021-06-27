@@ -178,6 +178,9 @@ public class controleur implements ActionListener{
 			panelAffichage.getCardLayout().first(panelAffichage.getCards());
 		}		
 		if(e.getSource() == panelAffichage.getBoutonTable()) {
+			panelAffichage.getCardLayout().show(panelAffichage.getCards(),"1");
+		}
+		if(e.getSource() == panelAffichage.getBoutonGraphique()) {
 			panelAffichage.getCardLayout().last(panelAffichage.getCards());
 		}
 	}

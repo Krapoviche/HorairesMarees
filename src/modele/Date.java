@@ -33,16 +33,19 @@ public class Date implements Serializable,Comparable<Date> {
 	}
 	
 	
-	
-	  public Date ()   { 
-		  GregorianCalendar dateAuj = new GregorianCalendar ();
-		  annee = dateAuj.get (Calendar.YEAR);
-		  mois = dateAuj.get (Calendar.MONTH) + 1; // janvier = 0, fevrier = 1...
-		  jour = dateAuj.get (Calendar.DAY_OF_MONTH);
-		  jourSemaine = dateAuj.get (Calendar.DAY_OF_WEEK);
-		  if (jourSemaine == 1)
-			  jourSemaine = 7;
-		  else jourSemaine -= 1; 
+	/**
+	 * constructeur des objets date à la date d'aujourd'hui
+	 * 
+	 */
+	public Date ()   { 
+		GregorianCalendar dateAuj = new GregorianCalendar ();
+		annee = dateAuj.get (Calendar.YEAR);
+		mois = dateAuj.get (Calendar.MONTH) + 1; // janvier = 0, fevrier = 1...
+		jour = dateAuj.get (Calendar.DAY_OF_MONTH);
+		jourSemaine = dateAuj.get (Calendar.DAY_OF_WEEK);
+		if (jourSemaine == 1)
+			jourSemaine = 7;
+		else jourSemaine -= 1; 
 	  }
 	
 	/**
@@ -61,7 +64,9 @@ public class Date implements Serializable,Comparable<Date> {
 	
 	
 	@Override
-
+	/**
+	 * compare des dates pour savoir si l'une est plus récente/vielle/la même
+	 */
 	public int compareTo(Date d) {
 		if(this.annee == d.annee) {
 			if(this.mois == d.mois) {
@@ -109,6 +114,7 @@ public class Date implements Serializable,Comparable<Date> {
 	  /***
 	   * 
 	   * Retourne la date du lendemain de l'objet date qui l'invoque
+	   * @return une date
 	   */
 	  public Date dateDuLendemain ()   {	
 	    if (jour < dernierJourDuMois(mois,annee))
@@ -122,6 +128,7 @@ public class Date implements Serializable,Comparable<Date> {
 	  /**
 	   * 
 	   * Retourne la date de la veille de l'objet date qui l'invoque
+	   * @return une date
 	   */
 	  public Date dateDeLaVeille () {    
 		if (jour > 1)

@@ -5,12 +5,13 @@ import java.util.TreeMap;
 import javax.swing.table.DefaultTableModel;
 
 public class MareeTable extends DefaultTableModel {
-
+	
+	String [] intilué = {"Heure", "Coefficient"};;
 		public MareeTable() {
-			String [] intilué = {"Heure", "Hauteur", "Coefficient"};
-			this.setColumnCount(intilué.length);
 			this.setColumnIdentifiers(intilué);
-			this.setRowCount(5);
+			this.setRowCount(18);
+			this.setValueAt("test", 1, 1);
+			
 			
 			
 		}

@@ -1,6 +1,7 @@
 package vue;
 
 import java.awt.BorderLayout;
+
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -16,6 +17,7 @@ import javax.swing.JTable;
 import controleur.controleur;
 import modele.MareeTable;
 
+
 public class PanelAffichage extends JPanel {
 
 	JLabel affichage = new JLabel("Choisissez un port");
@@ -24,11 +26,13 @@ public class PanelAffichage extends JPanel {
 	CardLayout cl = new CardLayout();
 	JPanel panelTable = new JPanel();
 	JPanel panelMaree = new JPanel();
+	JPanel panelGraphe = new JPanel();
 	JPanel panelBoutons = new JPanel();
 	JPanel cards = new JPanel(cl);
 
 	JButton boutonTable = new JButton("Heure par heure");
 	JButton boutonMaree = new JButton("Marées");
+	JButton boutonGraphe = new JButton("Graphique");
 
 	JLabel[] labelsCoefficient = new JLabel[4];
 	JLabel[] labelsHauteur = new JLabel[4];
@@ -50,6 +54,7 @@ public class PanelAffichage extends JPanel {
 		panelBoutons.setBackground(new Color(3, 34, 76));
 		boutonTable.setBackground(new Color(255, 200, 120));
 		boutonMaree.setBackground(new Color(255, 200, 120));
+		boutonGraphe.setBackground(new Color(255, 200, 120));
 		basseMer.setFont(new Font("Arial", Font.BOLD, 20));
 		pleineMer.setFont(new Font("Arial", Font.BOLD, 20));
 
@@ -132,23 +137,32 @@ public class PanelAffichage extends JPanel {
 			labelsHoraire[i].setFont(new Font("Arial", Font.BOLD, 16));
 		}
 
-		/*
-		 * tableMaree = new JTable(); tableMaree.setModel(new MareeTable());
-		 * tableMaree.getTableHeader().setBackground ( new java.awt.Color(202, 229, 86)
-		 * ); tableMaree.getTableHeader().setFont ( new Font("Arial",Font.BOLD,20) );
-		 * tableMaree.getTableHeader().setForeground ( new java.awt.Color(180, 100, 40)
-		 * ); add(tableMaree);
-		 */
+		
+		 tableMaree = new JTable();
+		 tableMaree.setModel(new MareeTable());
+		 tableMaree.getTableHeader().setBackground ( new java.awt.Color(202, 229, 86));
+		 tableMaree.getTableHeader().setFont ( new Font("Arial",Font.BOLD,20) );
+		 tableMaree.getTableHeader().setForeground ( new java.awt.Color(180, 100, 40));
+		 tableMaree.getTableHeader().setResizingAllowed(false);
+		 tableMaree.getTableHeader().setReorderingAllowed(false);
+		 tableMaree.setRowHeight(20);
+		 panelTable.add(tableMaree);
+		 
+		 
+		
 
 		panelAffichage.setLayout(new GridBagLayout());
 		panelAffichage.add(affichage);
 		add(panelAffichage, BorderLayout.NORTH);
-		boutonTable.setMnemonic('H');
-		panelBoutons.add(boutonTable);
 		boutonMaree.setMnemonic('M');
+		boutonTable.setMnemonic('H');
+		boutonGraphe.setMnemonic('G');
 		panelBoutons.add(boutonMaree);
-		cards.add(panelMaree, 0);
-		cards.add(panelTable, 1);
+		panelBoutons.add(boutonTable);
+		panelBoutons.add(boutonGraphe);
+		cards.add(panelMaree, "0");
+		cards.add(panelTable, "1");
+		cards.add(panelGraphe, "2");
 		cards.setVisible(false);
 		add(cards, BorderLayout.CENTER);
 		add(panelBoutons, BorderLayout.SOUTH);
@@ -173,6 +187,10 @@ public class PanelAffichage extends JPanel {
 	public JButton getBoutonMaree() {
 		return boutonMaree;
 	}
+	
+	public JButton getBoutonGraphique() {
+		return boutonGraphe;
+	}
 
 	public CardLayout getCardLayout() {
 		return cl;
@@ -185,6 +203,7 @@ public class PanelAffichage extends JPanel {
 	public void recordListener(controleur c) {
 		boutonTable.addActionListener(c);
 		boutonMaree.addActionListener(c);
+		boutonGraphe.addActionListener(c);
 	}
 
 	public JPanel[] getPanelsMaree() {
