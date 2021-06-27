@@ -12,27 +12,37 @@ public class ModeleMareeTable extends DefaultTableModel {
 			String[] intitules = {"heure","hauteur"};
 			setColumnCount(2);
 			setColumnIdentifiers(intitules);
-			setRowCount(24);
 				
+			Set<Integer> keys;
 			
-			Set<Integer> keys =  hauteursUnJour.getHauteursUnJour().keySet();
-			
+			if(hauteursUnJour != null) {
+				keys =  hauteursUnJour.getHauteursUnJour().keySet();
+				setRowCount(hauteursUnJour.getHauteursUnJour().size());
+			}
+			else {
+				keys = null;
+				setRowCount(0);
+			}
+				
 			
 			
 			
 			int compteurLigne = 0;
-			for(Integer i : keys) {
-				if(compteurLigne >= 10) {
-					setValueAt(i+"h00",compteurLigne,0);
-					setValueAt(hauteursUnJour.getHauteursUnJour().get(i).getHauteur(),compteurLigne,1);
-					compteurLigne++;
-				}
-				else {
-					setValueAt("0"+i+"h00",compteurLigne,0);
-					setValueAt(hauteursUnJour.getHauteursUnJour().get(i).getHauteur(),compteurLigne,1);
-					compteurLigne++;
+			if(keys != null) {
+				for(Integer i : keys) {
+					if(i >= 10) {
+						setValueAt(i+"h00",compteurLigne,0);
+						setValueAt(hauteursUnJour.getHauteursUnJour().get(i).getHauteur(),compteurLigne,1);
+						compteurLigne++;
+					}
+					else {
+						setValueAt("0"+i+"h00",compteurLigne,0);
+						setValueAt(hauteursUnJour.getHauteursUnJour().get(i).getHauteur(),compteurLigne,1);
+						compteurLigne++;
+					}
 				}
 			}
+
 			
 		}
 		

@@ -17,6 +17,7 @@ import javax.swing.JTable;
 
 import controleur.controleur;
 import modele.Date;
+import modele.HauteursDeMerUnJour;
 import modele.ModeleMareeTable;
 import outils.LectureFichierSer;
 
@@ -35,7 +36,6 @@ public class PanelAffichage extends JPanel {
 
 	JButton boutonTable = new JButton("Heure par heure");
 	JButton boutonMaree = new JButton("Marées");
-	JButton boutonGraphe = new JButton("Graphique");
 
 	JLabel[] labelsCoefficient = new JLabel[4];
 	JLabel[] labelsHauteur = new JLabel[4];
@@ -61,7 +61,6 @@ public class PanelAffichage extends JPanel {
 		panelBoutons.setBackground(new Color(3, 34, 76));
 		boutonTable.setBackground(new Color(255, 200, 120));
 		boutonMaree.setBackground(new Color(255, 200, 120));
-		boutonGraphe.setBackground(new Color(255, 200, 120));
 		basseMer.setFont(new Font("Arial", Font.BOLD, 20));
 		pleineMer.setFont(new Font("Arial", Font.BOLD, 20));
 
@@ -146,8 +145,6 @@ public class PanelAffichage extends JPanel {
 
 		
 		 tableMaree = new JTable();
-		 modele = new ModeleMareeTable(LectureFichierSer.lectureHph(new File("data_ports//data_hph_ser//DUNKERQUE.ser")).getHauteursDeMerUnPort().get(new Date(1,1,2020)));
-		 tableMaree.setModel(modele);
 		 panelTable.add(tableMaree);
 		 
 		 
@@ -158,10 +155,9 @@ public class PanelAffichage extends JPanel {
 		add(panelAffichage, BorderLayout.NORTH);
 		boutonMaree.setMnemonic('M');
 		boutonTable.setMnemonic('H');
-		boutonGraphe.setMnemonic('G');
+
 		panelBoutons.add(boutonMaree);
 		panelBoutons.add(boutonTable);
-		panelBoutons.add(boutonGraphe);
 		cards.add(panelMaree, "0");
 		cards.add(panelTable, "1");
 		cards.add(panelGraphe, "2");
@@ -190,9 +186,6 @@ public class PanelAffichage extends JPanel {
 		return boutonMaree;
 	}
 	
-	public JButton getBoutonGraphique() {
-		return boutonGraphe;
-	}
 
 	public CardLayout getCardLayout() {
 		return cl;
@@ -205,7 +198,6 @@ public class PanelAffichage extends JPanel {
 	public void recordListener(controleur c) {
 		boutonTable.addActionListener(c);
 		boutonMaree.addActionListener(c);
-		boutonGraphe.addActionListener(c);
 	}
 
 	public JPanel[] getPanelsMaree() {
@@ -222,6 +214,11 @@ public class PanelAffichage extends JPanel {
 
 	public JLabel[] getLabelsHoraire() {
 		return labelsHoraire;
+	}
+	
+	public void setTableModel(HauteursDeMerUnJour hauteursDeMerUnJour) {
+		modele = new ModeleMareeTable(hauteursDeMerUnJour);
+		tableMaree.setModel(modele);
 	}
 
 }

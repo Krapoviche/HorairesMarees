@@ -4,9 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 import modele.ConstantesCalendrier;
 import modele.Date;
+import modele.HauteurDeMer;
+import modele.HauteursDeMerUnJour;
+import modele.HauteursDeMerUnPort;
 import modele.Maree;
 import modele.MareesUnJour;
 import outils.LectureFichierSer;
@@ -81,8 +85,20 @@ public class controleur implements ActionListener{
 		for(PanelMois panelMois : panelCalendrier.getPanelCentre().getPanelsMois()) {
 			for(BoutonDate bouton : panelMois.getBoutonsDate()) {
 				if(e.getSource() == bouton) {
+					dateCourante = bouton.getDate();
 					if(bouton.getDate().compareTo(new Date(01,06,2021)) >= 0 && bouton.getDate().compareTo(new Date(30,9,2021)) <= 0 ) {
-						dateCourante = bouton.getDate();
+						if(dateCourante.compareTo(new Date(27,06,2021)) < 0) {
+							if(LectureFichierSer.lectureHph(new File("data_ports//data_hph_ser//"+port+".ser")) != null){
+								panelAffichage.setTableModel(LectureFichierSer.lectureHph(new File("data_ports//data_hph_ser//"+port+".ser")).getHauteursDeMerUnPort().get(dateCourante));
+							}
+							else {
+								panelAffichage.setTableModel(null);
+							}
+						}
+
+						else {
+							panelAffichage.setTableModel(null);
+						}
 						panelAffichage.getAffichageLabel().setText(port + " le " + dateCourante.toString());
 						
 						
@@ -117,6 +133,12 @@ public class controleur implements ActionListener{
 
 					else {
 						dateCourante = bouton.getDate();
+						if(LectureFichierSer.lectureHph(new File("data_ports//data_hph_ser//"+port+".ser"))!=null)
+							panelAffichage.setTableModel(LectureFichierSer.lectureHph(new File("data_ports//data_hph_ser//"+port+".ser")).getHauteursDeMerUnPort().get(dateCourante));
+
+						else
+							panelAffichage.setTableModel(null);
+							
 						panelAffichage.getAffichageLabel().setText(port + " le " + dateCourante.toString());
 						for(int compteur = 0 ; compteur < 4 ; compteur ++) {
 							panelAffichage.getCards().setVisible(true);
@@ -131,6 +153,17 @@ public class controleur implements ActionListener{
 		for(int i = 0; i <  panelChoix.getBoutonsPort().length ; i++) {
 			if(e.getSource() == panelChoix.getBoutonsPort()[i]) {
 				if(dateCourante.compareTo(new Date(01,06,2021)) >= 0 && dateCourante.compareTo(new Date(30,9,2021)) <= 0 ) {
+					if(dateCourante.compareTo(new Date(27,06,2021)) < 0) {
+						if(LectureFichierSer.lectureHph(new File("data_ports//data_hph_ser//"+port+".ser")) != null){
+							panelAffichage.setTableModel(LectureFichierSer.lectureHph(new File("data_ports//data_hph_ser//"+port+".ser")).getHauteursDeMerUnPort().get(dateCourante));
+						}
+						else {
+							panelAffichage.setTableModel(null);
+						}
+					}
+					else {
+						panelAffichage.setTableModel(null);
+					}
 					port = panelChoix.getBoutonsPort()[i].getPort();
 					panelAffichage.getAffichageLabel().setText(port + " le " + dateCourante.toString());
 					MareesUnJour mareesCourantes = LectureFichierSer.lecture(new File("data_ports//datas_ser//" + port.replaceAll(" ","_") + ".ser")).getMareesUnJourDuPort().get(new Date(dateCourante.getJour(),dateCourante.getMois(),dateCourante.getAnnee()));
@@ -162,6 +195,12 @@ public class controleur implements ActionListener{
 					}
 				}			
 				else {
+					port = panelChoix.getBoutonsPort()[i].getPort();
+					if(LectureFichierSer.lectureHph(new File("data_ports//data_hph_ser//"+port+".ser"))!=null)
+						panelAffichage.setTableModel(LectureFichierSer.lectureHph(new File("data_ports//data_hph_ser//"+port+".ser")).getHauteursDeMerUnPort().get(dateCourante));
+
+					else
+						panelAffichage.setTableModel(null);
 					panelAffichage.getAffichageLabel().setText(port + " le " + dateCourante.toString());
 					for(int compteur = 0 ; compteur < 4 ; compteur ++) {
 						panelAffichage.getCards().setVisible(true);
@@ -179,9 +218,6 @@ public class controleur implements ActionListener{
 		}		
 		if(e.getSource() == panelAffichage.getBoutonTable()) {
 			panelAffichage.getCardLayout().show(panelAffichage.getCards(),"1");
-		}
-		if(e.getSource() == panelAffichage.getBoutonGraphique()) {
-			panelAffichage.getCardLayout().last(panelAffichage.getCards());
 		}
 	}
 	

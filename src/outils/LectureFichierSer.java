@@ -34,19 +34,25 @@ public class LectureFichierSer {
 		ObjectInputStream flux ;
 		Object objetLu = null;
 		// Ouverture du fichier en mode lecture
-		try {
-			flux = new ObjectInputStream(new FileInputStream (parFichier));
-			objetLu = flux.readObject ();
-			flux.close ();
+		if(parFichier.exists()) {
+			try {
+				flux = new ObjectInputStream(new FileInputStream (parFichier));
+				objetLu = flux.readObject ();
+				flux.close ();
+			}
+			catch (ClassNotFoundException parException) {
+				System.err.println (parException.toString ());
+				System.exit (1);
+			}
+			catch (IOException parException) {
+				System.err.println ("Erreur lecture du fichier " + parException.toString ());
+				System.exit (1);
+			}
+			return (HauteursDeMerUnPort)objetLu ;
 		}
-		catch (ClassNotFoundException parException) {
-			System.err.println (parException.toString ());
-			System.exit (1);
+
+		else {
+			return null;
 		}
-		catch (IOException parException) {
-			System.err.println ("Erreur lecture du fichier " + parException.toString ());
-			System.exit (1);
-		}
-		return (HauteursDeMerUnPort)objetLu ;
 	}
 }
