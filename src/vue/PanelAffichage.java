@@ -41,6 +41,7 @@ public class PanelAffichage extends JPanel {
 	JLabel pleineMer = new JLabel("Pleines mers");
 	JPanel[] panelsMarees = new JPanel[4];
 	
+	
 	ModeleMareeTable modele;
 
 	public PanelAffichage() {

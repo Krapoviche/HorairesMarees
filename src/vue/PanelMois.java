@@ -37,7 +37,9 @@ public class PanelMois extends JPanel{
 		contrainte.insets = new Insets(10, 0, 10, 20);
 		
 		for(int i = 0 ; i < ConstantesCalendrier.JOURS_SEMAINE.length ; i++ ) {
-			add(new JLabel(ConstantesCalendrier.JOURS_SEMAINE_ABR[i]),contrainte);
+			JLabel label = new JLabel(ConstantesCalendrier.JOURS_SEMAINE_ABR[i]);
+			label.setForeground(new Color(255,200,120));
+			add(label,contrainte);
 		}
 		contrainte.gridy += 1;
 		Date[] datesArray = listeDates.toArray(new Date[0]);

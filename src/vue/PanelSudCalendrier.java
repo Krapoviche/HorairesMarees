@@ -44,6 +44,7 @@ public class PanelSudCalendrier extends JPanel{
 		contrainte.gridx = 0;
 		
 		labelMoisName.setText(ConstantesCalendrier.MOIS[getN()]);
+		labelMoisName.setForeground(new Color(255,200,120));
 		add(labelMoisName,contrainte);
 
 		contrainte.gridx += 1;
