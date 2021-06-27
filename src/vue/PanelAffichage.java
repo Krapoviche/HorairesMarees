@@ -8,6 +8,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -15,7 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 
 import controleur.controleur;
+import modele.Date;
 import modele.ModeleMareeTable;
+import outils.LectureFichierSer;
 
 
 public class PanelAffichage extends JPanel {
@@ -143,7 +146,7 @@ public class PanelAffichage extends JPanel {
 
 		
 		 tableMaree = new JTable();
-		 modele = new ModeleMareeTable();
+		 modele = new ModeleMareeTable(LectureFichierSer.lectureHph(new File("data_ports//data_hph_ser//DUNKERQUE.ser")).getHauteursDeMerUnPort().get(new Date(1,1,2020)));
 		 tableMaree.setModel(modele);
 		 panelTable.add(tableMaree);
 		 

@@ -1,5 +1,6 @@
 package modele;
 
+import java.util.Set;
 import java.util.TreeMap;
 
 import javax.swing.table.DefaultTableModel;
@@ -7,18 +8,32 @@ import javax.swing.table.DefaultTableModel;
 public class ModeleMareeTable extends DefaultTableModel {
 	
 	
-		public ModeleMareeTable() {
-			String intitules[] = new String[2];
-			intitules[0] = "heure";
-			intitules[1] = "coeficiant";
+		public ModeleMareeTable(HauteursDeMerUnJour hauteursUnJour) {
+			String[] intitules = {"heure","hauteur"};
 			setColumnCount(2);
 			setColumnIdentifiers(intitules);
-			setRowCount(5);
+			setRowCount(24);
 				
+			
+			Set<Integer> keys =  hauteursUnJour.getHauteursUnJour().keySet();
+			
+			
+			
+			
+			int compteurLigne = 0;
+			for(Integer i : keys) {
+				if(compteurLigne >= 10) {
+					setValueAt(i+"h00",compteurLigne,0);
+					setValueAt(hauteursUnJour.getHauteursUnJour().get(i).getHauteur(),compteurLigne,1);
+					compteurLigne++;
+				}
+				else {
+					setValueAt("0"+i+"h00",compteurLigne,0);
+					setValueAt(hauteursUnJour.getHauteursUnJour().get(i).getHauteur(),compteurLigne,1);
+					compteurLigne++;
+				}
+			}
+			
 		}
 		
-		public void setValueTableau( String valeur, int l, int c) {
-			setValueAt(valeur, l, c);
-		}
-			
 }

@@ -77,4 +77,4 @@ public class classe {
 		System.out.println(LectureFichierSer.lectureHph(new File("data_ports//data_hph_ser//DUNKERQUE.ser")).toString());
 	}
 }
-//>>>>>>> branch 'master' of https://github.com/Krapoviche/projdeouf
+

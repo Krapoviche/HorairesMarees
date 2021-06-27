@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class HauteurDeMer implements Serializable {
 	
+	private static final long serialVersionUID = -1181989042963630158L;
 	Double hauteur;
 	int heure;
 	
@@ -16,4 +17,7 @@ public class HauteurDeMer implements Serializable {
 		return heure + "h " + hauteur;
 	}
 
+	public Double getHauteur() {
+		return hauteur;
+	}
 }
