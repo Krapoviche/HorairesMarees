@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 
 import controleur.controleur;
-import modele.MareeTable;
+import modele.ModeleMareeTable;
 
 
 public class PanelAffichage extends JPanel {
@@ -40,6 +40,8 @@ public class PanelAffichage extends JPanel {
 	JLabel basseMer = new JLabel("Basses mers");
 	JLabel pleineMer = new JLabel("Pleines mers");
 	JPanel[] panelsMarees = new JPanel[4];
+	
+	ModeleMareeTable modele;
 
 	public PanelAffichage() {
 		setLayout(new BorderLayout(0, 0));
@@ -49,6 +51,7 @@ public class PanelAffichage extends JPanel {
 		this.setBackground(new Color(135, 206, 250));
 		panelTable.setBackground(new Color(135, 206, 250));
 		panelMaree.setBackground(new Color(135, 206, 250));
+		panelGraphe.setBackground(new Color(135, 206, 250));
 		panelAffichage.setBackground(new Color(3, 34, 76));
 		affichage.setForeground(new Color(255, 200, 120));
 		panelBoutons.setBackground(new Color(3, 34, 76));
@@ -139,13 +142,8 @@ public class PanelAffichage extends JPanel {
 
 		
 		 tableMaree = new JTable();
-		 tableMaree.setModel(new MareeTable());
-		 tableMaree.getTableHeader().setBackground ( new java.awt.Color(202, 229, 86));
-		 tableMaree.getTableHeader().setFont ( new Font("Arial",Font.BOLD,20) );
-		 tableMaree.getTableHeader().setForeground ( new java.awt.Color(180, 100, 40));
-		 tableMaree.getTableHeader().setResizingAllowed(false);
-		 tableMaree.getTableHeader().setReorderingAllowed(false);
-		 tableMaree.setRowHeight(20);
+		 modele = new ModeleMareeTable();
+		 tableMaree.setModel(modele);
 		 panelTable.add(tableMaree);
 		 
 		 
