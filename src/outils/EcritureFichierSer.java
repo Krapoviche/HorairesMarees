@@ -166,41 +166,43 @@ public class EcritureFichierSer {
 		Boolean ecrire = true;
 		
 		//Pour chaque fichier du dossier qui contient les fichiers traités en amont (LectureFichierTxt.traitementHeureParHeure)
-		for(int i = 0 ; i < dataFilesTxt.length ; i++) {
-			//On définit la nom du port comme le nom du fichier moins son extension
-			nomPort = dataFilesTxt[i].getName().split(".txt")[0];
-			
-			//Pour chaque port qu'on a déjà sérialisé
-			for(int j = 0 ; j < dataFilesSer.length ; j++) {
-				//Si le port courant est déjà sérialisé alors on ne l'écrit pas
-				if(dataFilesSer[j].getName().split(".ser")[0].equals(nomPort)) {
-					ecrire = false;
+		if(dataFilesTxt != null) {
+			for(int i = 0 ; i < dataFilesTxt.length ; i++) {
+				//On définit la nom du port comme le nom du fichier moins son extension
+				nomPort = dataFilesTxt[i].getName().split(".txt")[0];
+				
+				//Pour chaque port qu'on a déjà sérialisé
+				for(int j = 0 ; j < dataFilesSer.length ; j++) {
+					//Si le port courant est déjà sérialisé alors on ne l'écrit pas
+					if(dataFilesSer[j].getName().split(".ser")[0].equals(nomPort)) {
+						ecrire = false;
+					}
 				}
+				
+				//Si le port courant n'a pas encore été sérialisé (si son .ser n'existe pas)
+				if(ecrire) {
+					//On l'instancie à partir de son fichier (voir LectureFichierTxt.lectureHauteursDeMerUnPort())
+					HauteursDeMerUnPort hauteursPort = LectureFichierTxt.lectureHauteursDeMerUnPort(nomPort);
+					ObjectOutputStream flux = null;
+					try {
+						//Instanciation du flux en sortie
+						flux = new ObjectOutputStream (new FileOutputStream (new File("data_ports//data_hph_ser//" + hauteursPort.getPort() + ".ser")));
+						
+						//On écrit l'objet
+						flux.writeObject (hauteursPort);
+						
+						//Fermeture du flux
+						flux.flush ();
+						flux.close ();
+					}
+					catch (IOException parException) {
+						System.err.println ("Probleme a l’ecriture\n" + parException.toString ());
+						System.exit (1);
+					}
+				}
+				ecrire = true;
+				
 			}
-			
-			//Si le port courant n'a pas encore été sérialisé (si son .ser n'existe pas)
-			if(ecrire) {
-				//On l'instancie à partir de son fichier (voir LectureFichierTxt.lectureHauteursDeMerUnPort())
-				HauteursDeMerUnPort hauteursPort = LectureFichierTxt.lectureHauteursDeMerUnPort(nomPort);
-				ObjectOutputStream flux = null;
-				try {
-					//Instanciation du flux en sortie
-					flux = new ObjectOutputStream (new FileOutputStream (new File("data_ports//data_hph_ser//" + hauteursPort.getPort() + ".ser")));
-					
-					//On écrit l'objet
-					flux.writeObject (hauteursPort);
-					
-					//Fermeture du flux
-					flux.flush ();
-					flux.close ();
-				}
-				catch (IOException parException) {
-					System.err.println ("Probleme a l’ecriture\n" + parException.toString ());
-					System.exit (1);
-				}
-			}
-			ecrire = true;
-			
 		}
 	}
 }

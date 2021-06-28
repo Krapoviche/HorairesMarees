@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import controleur.controleur;
 import outils.EcritureFichierSer;
 import outils.LectureFichierSer;
+import outils.LectureFichierTxt;
 
 /**
  * Cette classe permet d'instancier des objets fenetreMere qui forment le conteneur principal du programme (la fenêtre). Cette classe contient également le main du programme.
@@ -19,6 +20,8 @@ public class FenetreMere extends JFrame {
 	 * Unique constructeur de la classe, permet l'instanciation d'une fenêtre en traitant les données au démarrage
 	 */
 	public FenetreMere() {
+		LectureFichierTxt.traitementHeureParHeure();
+		
 		//Écriture des fichiers objets qui n'existent pas encore
 		EcritureFichierSer.ecrireDemarrage();
 		//Pareil, pour les données heure par heure
