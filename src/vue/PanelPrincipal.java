@@ -1,6 +1,7 @@
 package vue;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.swing.JPanel;
 
@@ -14,12 +15,12 @@ public class PanelPrincipal extends  JPanel{
 
 	
 	public PanelPrincipal() {
-		setLayout(new BorderLayout(0,0));
+		setLayout(new BorderLayout(15,15));
 		
 		panelAffichage = new PanelAffichage();
 		panelChoix = new PanelChoix();
 		panelCalendrier = new PanelCalendrier();
-		
+		setBackground(new Color(3,34, 76));		
 		
 		add(BorderLayout.CENTER, panelAffichage);
 		add(BorderLayout.EAST, panelChoix);

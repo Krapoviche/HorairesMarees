@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -13,7 +14,9 @@ import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ScrollPaneConstants;
 
 import controleur.controleur;
 import modele.Date;
@@ -30,7 +33,6 @@ public class PanelAffichage extends JPanel {
 	CardLayout cl = new CardLayout();
 	JPanel panelTable = new JPanel();
 	JPanel panelMaree = new JPanel();
-	JPanel panelGraphe = new JPanel();
 	JPanel panelBoutons = new JPanel();
 	JPanel cards = new JPanel(cl);
 
@@ -55,7 +57,6 @@ public class PanelAffichage extends JPanel {
 		this.setBackground(new Color(135, 206, 250));
 		panelTable.setBackground(new Color(135, 206, 250));
 		panelMaree.setBackground(new Color(135, 206, 250));
-		panelGraphe.setBackground(new Color(135, 206, 250));
 		panelAffichage.setBackground(new Color(3, 34, 76));
 		affichage.setForeground(new Color(255, 200, 120));
 		panelBoutons.setBackground(new Color(3, 34, 76));
@@ -143,13 +144,14 @@ public class PanelAffichage extends JPanel {
 			labelsHoraire[i].setFont(new Font("Arial", Font.BOLD, 16));
 		}
 
-		
+		 panelTable.setLayout(new BorderLayout(0,0));
 		 tableMaree = new JTable();
 		 modele = new ModeleMareeTable(LectureFichierSer.lectureHph(new File("data_ports//data_hph_ser//DUNKERQUE.ser")).getHauteursDeMerUnPort().get(new Date(1,1,2020)));
 		 tableMaree.setModel(modele);
-		 panelTable.add(tableMaree);
-		 //tableMaree.setDefaultRenderer(String.class, new CelluleRenderer()) ;
-		 //tableMaree.setDefaultRenderer(Double.class, new CelluleRenderer()) ;
+		 tableMaree.setRowHeight(30);
+		 panelTable.add(new JScrollPane(tableMaree,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED) ,BorderLayout.CENTER);
+		 tableMaree.setDefaultRenderer(String.class, new CelluleRenderer()) ;
+		 tableMaree.setDefaultRenderer(Double.class, new CelluleRenderer()) ;
 		 
 		
 
@@ -163,7 +165,6 @@ public class PanelAffichage extends JPanel {
 		panelBoutons.add(boutonTable);
 		cards.add(panelMaree, "0");
 		cards.add(panelTable, "1");
-		cards.add(panelGraphe, "2");
 		cards.setVisible(false);
 		add(cards, BorderLayout.CENTER);
 		add(panelBoutons, BorderLayout.SOUTH);

@@ -6,10 +6,11 @@ import java.util.TreeMap;
 import javax.swing.table.DefaultTableModel;
 
 public class ModeleMareeTable extends DefaultTableModel {
-	
+	HauteursDeMerUnJour hauteursUnJour;
 	
 		public ModeleMareeTable(HauteursDeMerUnJour hauteursUnJour) {
-			String[] intitules = {"heure","hauteur"};
+			this.hauteursUnJour = hauteursUnJour;
+			String[] intitules = {"HEURE","HAUTEUR"};
 			setColumnCount(2);
 			setColumnIdentifiers(intitules);
 				
@@ -21,7 +22,7 @@ public class ModeleMareeTable extends DefaultTableModel {
 			}
 			else {
 				keys = null;
-				setRowCount(0);
+				setRowCount(24);
 			}
 				
 			
@@ -42,16 +43,35 @@ public class ModeleMareeTable extends DefaultTableModel {
 					}
 				}
 			}
+			else {
+				for(int i = 0 ; i < getRowCount() ; i++) {
+					if(i >= 10) {
+						setValueAt(i+"h00",compteurLigne,0);
+						setValueAt("Aucune donnée disponible",compteurLigne,1);
+						compteurLigne++;
+					}
+					else {
+						setValueAt("0"+i+"h00",compteurLigne,0);
+						setValueAt("Aucune donnée disponible",compteurLigne,1);
+						compteurLigne++;
+					}
+				}
+			}
 
 			
 		}
 		public Class getColumnClass(int col) {
-			if( col == 0) {
-				return String.class;
-			}
-			else{
+			if( col == 1 && hauteursUnJour != null) {
 				return Double.class;
 			}
+			else{
+				return String.class;
+			}
+		}
+		
+		@Override
+		public boolean isCellEditable(int row, int column) {
+			return false;
 		}
 		
 }
