@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
- * classe qui permet d'instancier des objets Date
+ * Classe qui permet d'instancier des objets Date.
  * Cette classe à été créée par l'équipe pédagogique de l'IUT de Vélizy - Département Informatique.
  */
 

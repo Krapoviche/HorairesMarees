@@ -23,7 +23,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
  
 /**
- * classe qui permet de lire les fichier 
+ * Classe qui permet de lire les fichier .txt pour en récupérer des objets complets
  */
 
 public class LectureFichierTxt {

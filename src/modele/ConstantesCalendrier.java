@@ -4,7 +4,7 @@ import java.awt.Color;
 
 
 /**
- * Interface qui contient les différentes variables (String) qui servent à l'instanciation des objets que contient un panelCalendrier
+ * Interface qui contient les différentes variables (String) qui servent à l'instanciation des objets que contient un panelCalendrier.
  * Cette interface à été créée par l'équipe pédagogique de l'IUT de Vélizy - Département Informatique.
  *
  */

@@ -4,7 +4,7 @@ import java.util.Collection;
 
 
 /**
- * Classe qui génère un TreeSet qui contient toutes les dates d'un mois (contient également les dates hors mois qui appartiennent aux semaines du mois traité)
+ * Classe qui génère un TreeSet qui contient toutes les dates d'un mois (contient également les dates hors mois qui appartiennent aux semaines du mois traité).
  * Cette classe à été créée par l'équipe pédagogique de l'IUT de Vélizy - Département Informatique.
  *
  */

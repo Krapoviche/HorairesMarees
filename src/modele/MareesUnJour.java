@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * classe qui permet d'instancier des objet MareesUnJour
+ * Classe qui permet d'instancier des objet MareesUnJour.
  */
 public class MareesUnJour implements Serializable {
 	private static final long serialVersionUID = 7062286444439820135L;

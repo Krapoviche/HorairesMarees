@@ -6,7 +6,7 @@ import java.util.TreeMap;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * Classe du modele de la table qui affiche les hauteurs de mer heure par heure
+ * Classe du modele de la table qui affiche les hauteurs de mer heure par heure.
  *
  */
 public class ModeleMareeTable extends DefaultTableModel {

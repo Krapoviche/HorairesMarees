@@ -238,6 +238,7 @@ public class controleur implements ActionListener{
 		//On vérifie les dates puis on traite les données heure par heure si elles existent, pareils pour les données relatives aux marées
 		for(int i = 0; i <  panelChoix.getBoutonsPort().length ; i++) {
 			if(e.getSource() == panelChoix.getBoutonsPort()[i]) {
+				port = panelChoix.getBoutonsPort()[i].getPort();
 				if(dateCourante.compareTo(new Date(01,06,2021)) >= 0 && dateCourante.compareTo(new Date(30,9,2021)) <= 0 ) {
 					if(dateCourante.compareTo(new Date(27,06,2021)) < 0) {
 						if(LectureFichierSer.lectureHph(new File("data_ports//data_hph_ser//"+port+".ser")) != null){
@@ -250,7 +251,6 @@ public class controleur implements ActionListener{
 					else {
 						panelAffichage.setTableModel(null);
 					}
-					port = panelChoix.getBoutonsPort()[i].getPort();
 					panelAffichage.getAffichageLabel().setText(port + " le " + dateCourante.toString());
 					MareesUnJour mareesCourantes = LectureFichierSer.lecture(new File("data_ports//datas_ser//" + port.replaceAll(" ","_") + ".ser")).getMareesUnJourDuPort().get(new Date(dateCourante.getJour(),dateCourante.getMois(),dateCourante.getAnnee()));
 					ArrayList<Maree> mareeList = new ArrayList<Maree>();
@@ -281,7 +281,6 @@ public class controleur implements ActionListener{
 					}
 				}			
 				else {
-					port = panelChoix.getBoutonsPort()[i].getPort();
 					if(LectureFichierSer.lectureHph(new File("data_ports//data_hph_ser//"+port+".ser"))!=null)
 						panelAffichage.setTableModel(LectureFichierSer.lectureHph(new File("data_ports//data_hph_ser//"+port+".ser")).getHauteursDeMerUnPort().get(dateCourante));
 

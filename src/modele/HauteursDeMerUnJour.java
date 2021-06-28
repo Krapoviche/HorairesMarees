@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 /**
- * Classe qui permet d'instancier des objets contenant les hauteurs de mer heure par heure pour un jour
+ * Classe qui permet d'instancier des objets contenant les hauteurs de mer heure par heure pour un jour.
  *
  */
 public class HauteursDeMerUnJour implements Serializable{

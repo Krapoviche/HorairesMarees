@@ -3,7 +3,7 @@ package modele;
 import java.io.Serializable;
 
 /**
- * classe qui permet d'instancier des objets Maree
+ * Classe qui permet d'instancier des objets Maree.
  */
 
 

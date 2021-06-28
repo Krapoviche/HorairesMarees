@@ -7,8 +7,17 @@ import java.io.ObjectInputStream;
 import modele.HauteursDeMerUnPort;
 import modele.MareesUnPort;
 
+/**
+ * Cette classe permet de lire les objets à partir de leurs fichiers sérialisés
+ *
+ */
 public class LectureFichierSer {
 	
+	/**
+	 * Cette méthode permet de lire les objets MareesUnPort écris dans des fichiers sérialisés
+	 * @param parFichier Le fichier sérialisé
+	 * @return L'objet MareesUnPort lu
+	 */
 	public static MareesUnPort lecture (File parFichier) {
 		ObjectInputStream flux ;
 		Object objetLu = null;
@@ -29,7 +38,13 @@ public class LectureFichierSer {
 		return (MareesUnPort)objetLu ;
 	}
 	
+
 	
+	/**
+	 * Cette méthode permet de lire les objets HauteursDeMerUnPort écris dans des fichiers sérialisés
+	 * @param parFichier Le fichier sérialisé
+	 * @return L'objet HauteursDeMerUnPort lu
+	 */
 	public static HauteursDeMerUnPort lectureHph(File parFichier) {
 		ObjectInputStream flux ;
 		Object objetLu = null;

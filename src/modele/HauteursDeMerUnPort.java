@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 /**
- * Classe qui permet d'instancier des objets contenant toutes les hauteurs de mer pour tous les jours pour un port 
+ * Classe qui permet d'instancier des objets contenant toutes les hauteurs de mer pour tous les jours pour un port.
  *
  */
 

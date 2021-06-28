@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Set;
 import java.util.TreeMap;
 /**
- * Classe qui permet d'instancier des objets qui contiennent toutes les marées pour tous les jours pour un port
+ * Classe qui permet d'instancier des objets qui contiennent toutes les marées pour tous les jours pour un port.
  *
  */
 public class MareesUnPort implements Serializable{
