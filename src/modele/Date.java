@@ -6,6 +6,7 @@ import java.util.GregorianCalendar;
 
 /**
  * classe qui permet d'instancier des objets Date
+ * Cette classe à été créée par l'équipe pédagogique de l'IUT de Vélizy - Département Informatique.
  */
 
 public class Date implements Serializable,Comparable<Date> {
@@ -17,9 +18,12 @@ public class Date implements Serializable,Comparable<Date> {
 	private int mois;
 	private int annee;
 	private int jourSemaine;
-	/** 
-	 * constructeur des objets Date
-	 * @param numéros de jour, mois et anne
+
+	/**
+	 * Constructeur qui instancie un objet Date
+	 * @param jour le jour (de 0 à 30)
+	 * @param mois le mois (de 0 à 11)
+	 * @param annee l'année
 	 */
 	public Date(int jour,int mois, int annee) {
 		this.jour = jour;
@@ -34,7 +38,7 @@ public class Date implements Serializable,Comparable<Date> {
 	
 	
 	/**
-	 * constructeur des objets date à la date d'aujourd'hui
+	 * Constructeur qui instancie un objet Date avec la date courante
 	 * 
 	 */
 	public Date ()   { 
@@ -48,10 +52,6 @@ public class Date implements Serializable,Comparable<Date> {
 		else jourSemaine -= 1; 
 	  }
 	
-	/**
-	 * affichage d'un objet Date
-	 * @return jour/mois/annee de type stringh 
-	 */
 	public String toString() {
 		return(jour + "/" +mois +  "/" + annee);
 	}
@@ -64,9 +64,6 @@ public class Date implements Serializable,Comparable<Date> {
 	
 	
 	@Override
-	/**
-	 * compare des dates pour savoir si l'une est plus récente/vielle/la même
-	 */
 	public int compareTo(Date d) {
 		if(this.annee == d.annee) {
 			if(this.mois == d.mois) {
@@ -111,11 +108,10 @@ public class Date implements Serializable,Comparable<Date> {
 	}
 
 
-	  /***
-	   * 
-	   * Retourne la date du lendemain de l'objet date qui l'invoque
-	   * @return une date
-	   */
+	/**
+	 * Retourne la date du lendemain de l'objet date qui l'invoque
+	 * @return un objet Date qui correspond à la date du lendemain
+	 */
 	  public Date dateDuLendemain ()   {	
 	    if (jour < dernierJourDuMois(mois,annee))
 			     return  new Date (jour+1,mois,annee);
@@ -125,11 +121,10 @@ public class Date implements Serializable,Comparable<Date> {
 	  }  
 	  
 	  
-	  /**
-	   * 
-	   * Retourne la date de la veille de l'objet date qui l'invoque
-	   * @return une date
-	   */
+		/**
+		 * Retourne la date de la veille de l'objet date qui l'invoque
+		 * @return un objet Date qui correspond à la date de la veille
+		 */
 	  public Date dateDeLaVeille () {    
 		if (jour > 1)
 				return  new Date (jour-1,mois,annee);
@@ -140,9 +135,9 @@ public class Date implements Serializable,Comparable<Date> {
 	  
 	  
 	  /**
-	   * retourne la date du dernier jour du mois passé en paramète
-	   * @param parMois - Numéro du mois
-	   * @param parAnnee - Numéro de l'année
+	   * Retourne la date du dernier jour du mois passé en paramètre
+	   * @param parMois  Le mois
+	   * @param parAnnee L'année
 	   * @return Le dernier jour du mois
 	   */
 	  public static int dernierJourDuMois (int parMois, int parAnnee) {
@@ -154,9 +149,8 @@ public class Date implements Serializable,Comparable<Date> {
 		  } 
 		  
 	  /**
-	   * Dis si l'année en paramètre est bissextile ou non
-	   * @param parAnnee - Numéro de l'année
-	   * @return True si vrai False si faux
+	   * Retourne si l'année passée en paramètre est bissextile ou non
+	   * @param parAnnee L'année
 	   */
 	  private static boolean estBissextile(int parAnnee) {
 				return parAnnee % 4 == 0 && (parAnnee % 100 != 0 || parAnnee % 400 == 0);
