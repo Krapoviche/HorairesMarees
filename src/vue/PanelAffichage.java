@@ -145,8 +145,11 @@ public class PanelAffichage extends JPanel {
 
 		
 		 tableMaree = new JTable();
+		 modele = new ModeleMareeTable(LectureFichierSer.lectureHph(new File("data_ports//data_hph_ser//DUNKERQUE.ser")).getHauteursDeMerUnPort().get(new Date(1,1,2020)));
+		 tableMaree.setModel(modele);
 		 panelTable.add(tableMaree);
-		 
+		 //tableMaree.setDefaultRenderer(String.class, new CelluleRenderer()) ;
+		 //tableMaree.setDefaultRenderer(Double.class, new CelluleRenderer()) ;
 		 
 		
 

@@ -45,5 +45,13 @@ public class ModeleMareeTable extends DefaultTableModel {
 
 			
 		}
+		public Class getColumnClass(int col) {
+			if( col == 0) {
+				return String.class;
+			}
+			else{
+				return Double.class;
+			}
+		}
 		
 }
