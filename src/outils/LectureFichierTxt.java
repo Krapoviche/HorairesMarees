@@ -209,54 +209,57 @@ public class LectureFichierTxt {
 			File dataFolder = new File("data_ports/data_treated/");
 			File[] dataFiles = dataFolder.listFiles();
 			
-			//Pour chacun des fichiers du dossier
-			for(int i = 0 ; i < dataFiles.length ; i++) {
-				//On ne traite que le fichier qui correspond au port demandé.
-				if(dataFiles[i].getName().split(".txt")[0].equals(nomPort)) {
-					//On définit le buffer, et la ligne lue
-					BufferedReader buffer = new BufferedReader (new InputStreamReader ( new FileInputStream (dataFiles[i]), StandardCharsets.UTF_8));
-					String ligneLue ; 
-					
-					//Définition du compteur de lignes
-					int numLigne = 0 ;
-					HauteursDeMerUnJour hauteursAujd;
-					
-					//Pour chacune des lignes du fichier
-					Date oldDate = new Date(); 
-					TreeMap<Integer,HauteurDeMer> hauteursUnJour = new TreeMap<Integer,HauteurDeMer>();
-					while ((ligneLue = buffer.readLine()) != null) {
+			//Si le dossier n'est pas vide
+			if(dataFiles != null) {
+				//Pour chacun des fichiers du dossier
+				for(int i = 0 ; i < dataFiles.length ; i++) {
+					//On ne traite que le fichier qui correspond au port demandé.
+					if(dataFiles[i].getName().split(".txt")[0].equals(nomPort)) {
+						//On définit le buffer, et la ligne lue
+						BufferedReader buffer = new BufferedReader (new InputStreamReader ( new FileInputStream (dataFiles[i]), StandardCharsets.UTF_8));
+						String ligneLue ; 
 						
+						//Définition du compteur de lignes
+						int numLigne = 0 ;
+						HauteursDeMerUnJour hauteursAujd;
 						
+						//Pour chacune des lignes du fichier
+						Date oldDate = new Date(); 
+						TreeMap<Integer,HauteurDeMer> hauteursUnJour = new TreeMap<Integer,HauteurDeMer>();
+						while ((ligneLue = buffer.readLine()) != null) {
+							
+							
+							
+							Date dateTraitee;
+							String date = ligneLue.split(" ")[0];
+							String donnees = ligneLue.split(" ")[1];
+							String horaire = donnees.split(";")[0];
+							String hauteur = donnees.split(";")[1];
+							String heure = horaire.split(":")[0];
 						
-						Date dateTraitee;
-						String date = ligneLue.split(" ")[0];
-						String donnees = ligneLue.split(" ")[1];
-						String horaire = donnees.split(";")[0];
-						String hauteur = donnees.split(";")[1];
-						String heure = horaire.split(":")[0];
-					
-						//Définition de la date de la marée à partir des données lues dans la ligne
-						dateTraitee = new Date(Integer.parseInt(date.split("/")[0]),Integer.parseInt(date.split("/")[1]),Integer.parseInt(date.split("/")[2]));
-						//Définition des quatre marées à partir des données lues dans la ligne
-						HauteurDeMer hauteurDeMer = new HauteurDeMer(Double.parseDouble(hauteur),Integer.parseInt(heure));
-						
-						//On vérifie qu'on a pas changé de date / Java nous obligeant à initialiser nos varibles on est obligés d'accepter la première date pour ensuite la modifier (en faire une old_date)
-						if(numLigne<1 || dateTraitee.compareTo(oldDate) == 0) {
-							hauteursUnJour.put(Integer.parseInt(heure),hauteurDeMer);
+							//Définition de la date de la marée à partir des données lues dans la ligne
+							dateTraitee = new Date(Integer.parseInt(date.split("/")[0]),Integer.parseInt(date.split("/")[1]),Integer.parseInt(date.split("/")[2]));
+							//Définition des quatre marées à partir des données lues dans la ligne
+							HauteurDeMer hauteurDeMer = new HauteurDeMer(Double.parseDouble(hauteur),Integer.parseInt(heure));
+							
+							//On vérifie qu'on a pas changé de date / Java nous obligeant à initialiser nos varibles on est obligés d'accepter la première date pour ensuite la modifier (en faire une old_date)
+							if(numLigne<1 || dateTraitee.compareTo(oldDate) == 0) {
+								hauteursUnJour.put(Integer.parseInt(heure),hauteurDeMer);
+							}
+							
+							//Si on a changé de date, on enregistre l'objet pour la journée complète que l'on vient de finir, puis on passe à la journée suivante
+							else {
+								hauteursAujd = new HauteursDeMerUnJour(new TreeMap<Integer,HauteurDeMer>(hauteursUnJour),oldDate);
+								hauteursUnPort.put(oldDate, hauteursAujd);
+								hauteursUnJour.clear();
+								hauteursUnJour.put(Integer.parseInt(heure),hauteurDeMer);
+							}
+							
+	
+							//incrémentations & passage en old
+							oldDate = dateTraitee;
+							numLigne++;
 						}
-						
-						//Si on a changé de date, on enregistre l'objet pour la journée complète que l'on vient de finir, puis on passe à la journée suivante
-						else {
-							hauteursAujd = new HauteursDeMerUnJour(new TreeMap<Integer,HauteurDeMer>(hauteursUnJour),oldDate);
-							hauteursUnPort.put(oldDate, hauteursAujd);
-							hauteursUnJour.clear();
-							hauteursUnJour.put(Integer.parseInt(heure),hauteurDeMer);
-						}
-						
-
-						//incrémentations & passage en old
-						oldDate = dateTraitee;
-						numLigne++;
 					}
 				}
 			}
